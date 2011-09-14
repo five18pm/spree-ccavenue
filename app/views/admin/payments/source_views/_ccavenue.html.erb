@@ -1,0 +1,26 @@
+<h3><%= t("ccavenue_heading") %></h3>
+
+<table>
+  <tr>
+    <th><%= t("ccavenue_local_order") %></th>
+    <th><%= t("ccavenue_remote_order") %></th>
+    <th><%= t("ccavenue_gateway_order") %></th>
+    <th><%= t("ccavenue_amount") %></th>
+    <th><%= t("ccavenue_authorization") %></th>
+    <th><%= t("ccavenue_payment_method") %></th>
+    <th><%= t("ccavenue_payment_state") %></th>
+    <th><%= t("ccavenue_tried_at") %></th>
+  </tr>
+<% @payment.order.ccavenue_infos.reverse.each do |c| %>
+  <tr>
+    <td><%= link_to c.order_number, admin_order_path(c.order) %></td>
+    <td><%= c.remote_order_number %></td>
+    <td><%= c.gateway_order_no %></td>
+    <td><%= c.amount_str %></td>
+    <td><%= c.auth_desc %></td>
+    <td><%= c.card_category %></td>
+    <td><%= c.state.capitalize %></td>
+    <td><%= c.created_at %></td>
+  </tr>
+<% end %>
+</table>

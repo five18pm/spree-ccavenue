@@ -1,0 +1,12 @@
+\#*
+*~
+.#*
+.DS_Store
+.idea
+.project
+tmp
+nbproject
+*.swp
+*.class
+*.pyc
+*.pyo
