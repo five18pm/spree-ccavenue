@@ -15,7 +15,7 @@ Installation
 ============
 
 1. Add to Gemfile:
-        gem 'spree_ccavenue', :git => 'git://github.com/five18pm/spree_ccavenue.git'
+        gem 'spree_ccavenue', :git => 'git://github.com/five18pm/Spree-CCAvenue.git'
 
 2. run bundler
         bundle install
