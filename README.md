@@ -21,7 +21,7 @@ Installation
         bundle install
 
 3. Install migration
-        rake spree_ccavenue:install
+        rails g spree_ccavenue:install
 
 4. Run migration
         rake db:migrate
