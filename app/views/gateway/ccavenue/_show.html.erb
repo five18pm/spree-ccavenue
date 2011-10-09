@@ -11,7 +11,7 @@
     merchant_id = @gateway.preferred_account_id
     order_id = @order.ccavenue_latest_txn.remote_order_number 
     amount = @order.total.to_s
-    redirect_url = gateway_ccavenue_comeback_url(@order)
+    redirect_url = gateway_ccavenue_comeback_url(@order, :protocol => "http")
     checksum = get_checksum(merchant_id, order_id, amount, redirect_url, @gateway.preferred_working_key)
   %>
   <p><%= t('ccavenue_instuctional_text') %></p><br/>
