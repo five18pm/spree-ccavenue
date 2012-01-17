@@ -1,6 +1,4 @@
-Rails.application.routes.draw do
-  namespace :gateway do
-    match '/:gateway_id/ccavenue/:order_id' => 'ccavenue#show',     :as => :ccavenue
-    match '/ccavenue/:id/comeback'          => 'ccavenue#comeback', :as => :ccavenue_comeback
-  end
+Spree::Core::Engine.routes.append do
+  match "/gateway/:order_id/ccavenue/:payment_method_id" => 'ccavenue/gateway#show', :as => :gateway_ccavenue
+  match "/gateway/ccavenue/:id/callback" => 'ccavenue/gateway#callback', :as => :gateway_ccavenue_callback
 end
