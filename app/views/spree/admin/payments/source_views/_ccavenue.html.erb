@@ -1,0 +1,27 @@
+<% transactions = @payment.order.ccavenue_transactions %>
+
+<% if transactions.any? %>
+<% transactions = transactions.reverse %>
+<table>
+  <tr>
+    <th><%= I18n.t('ccavenue.transaction') %></th>
+    <th><%= I18n.t('ccavenue.state') %></th>
+    <th><%= I18n.t('ccavenue.ccavenue_order_number') %></th>
+    <th><%= I18n.t('ccavenue.auth_desc') %></th>
+    <th><%= I18n.t('ccavenue.checksum') %></th>
+    <th><%= I18n.t('ccavenue.card_category') %></th>
+  </tr>
+  <% transactions.each do |txn| %>
+  <tr>
+    <td><%= txn.gateway_order_number %></td>
+    <td><%= txn.state %></td>
+    <td><%= txn.ccavenue_order_number rescue '' %></td>
+    <td><%= txn.auth_desc rescue '' %></td>
+    <td><%= txn.checksum rescue '' %></td>
+    <td><%= txn.card_category rescue '' %></td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+<p><%= I18n.t('no_transactions') %></p>
+<% end %>

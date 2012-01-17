@@ -1,0 +1,15 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  payment_rejected: "Payment was not approved at the payment gateway. Retry with correct creditcard/netbanking information"
+  payment_canceled: "Payment canceled at the payment gateway"
+  ccavenue_invalid_transaction: "We received an invalid response from payment gateway. Please retry the payment"
+  no_transactions: "There are no transactions"
+  ccavenue:
+    transaction: "Transaction"
+    state: "State"
+    ccavenue_order_number: "Order number at CCAvenue"
+    checksum: "Checksum"
+    card_category: "Card Category"
+    auth_desc: "Auth Desc (Authorization)"

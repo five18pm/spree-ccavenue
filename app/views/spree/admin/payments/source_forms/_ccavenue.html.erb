@@ -1,0 +1,18 @@
+<fieldset>
+  <% param_prefix = "payment_source[#{payment_method.id}]" %>
+  <%= hidden_field_tag "#{param_prefix}[from_admin]", true %>
+  <%= hidden_field_tag "#{param_prefix}[order_id]", @payment.order.id %>
+  <%= hidden_field_tag "#{param_prefix}[payment_method_id]", payment_method.id %>
+  <p class="field">
+    <%= label_tag nil, I18n.t('ccavenue.auth_desc') %>
+    <%= select_tag "#{param_prefix}[auth_desc]", options_for_select([["Y", "Y"],["N", "N"],["B","B"]])%>
+  </p>
+  <p class="field">
+    <%= label_tag nil, I18n.t('ccavenue.ccavenue_order_number') %>
+    <%= text_field_tag "#{param_prefix}[ccavenue_order_number]" %>
+  </p>
+  <p class="field">
+    <%= label_tag nil, I18n.t('ccavenue.card_category') %>
+    <%= text_field_tag "#{param_prefix}[card_category]" %>
+  </p>
+</fieldset>
