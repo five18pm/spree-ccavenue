@@ -7,6 +7,4 @@
 tmp
 nbproject
 *.swp
-*.class
-*.pyc
-*.pyo
+spec/dummy
