@@ -3,13 +3,13 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_ccavenue'
   s.version     = '1.1.0'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'CCAvenue payment gateway support for Spree'
+  s.description = 'CCAvenue is payment gateway widely used in India. This gem provides suppport for CCAvenue in Spree'
   s.required_ruby_version = '>= 1.8.7'
 
-  # s.author            = 'You'
-  # s.email             = 'you@example.com'
-  # s.homepage          = 'http://www.spreecommerce.com'
+  s.author            = 'Chandramohan Rangaswamy'
+  s.email             = 'chandru@simplelife.in'
+  s.homepage          = 'http://www.simplelife.in'
 
   #s.files         = `git ls-files`.split("\n")
   #s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
