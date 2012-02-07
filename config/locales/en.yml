@@ -6,6 +6,7 @@ en:
   payment_canceled: "Payment canceled at the payment gateway"
   ccavenue_invalid_transaction: "We received an invalid response from payment gateway. Please retry the payment"
   no_transactions: "There are no transactions"
+  ccavenue_instructional_text: "You will now be redirected to our payment gateway"
   ccavenue:
     transaction: "Transaction"
     state: "State"

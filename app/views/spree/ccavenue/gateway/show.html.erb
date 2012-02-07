@@ -2,51 +2,50 @@
   <%= javascript_include_tag states_path %>
 <% end %>
 <div id="checkout" data-hook>
-  <h1><%= t(:checkout) %></h1>
-  <%= checkout_progress %>
-  <br clear="left" />
   <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
-  <% if @order.state != 'confirm' %>
-    <div id="checkout-summary" data-hook="checkout_summary_box">
-      <%= render :partial => 'summary', :locals => { :order => @order } %>
+  <h3><%= t(:checkout) %></h3>  
+  <div class="alpha omega grid_24">
+    <div class="<%= if @order.state != 'confirm' then 'alpha grid_16' else 'alpha omega grid_24' end %>">
+      <div class="checkout_progress"><%= checkout_progress %><div class="clear"></div></div>
+      <div class="checkout_form">
+        <%= form_tag @payment_method.preferred_url do %>
+        <%
+          merchant_id  = @payment_method.preferred_account_id
+          order_id     = @transaction.gateway_order_number 
+          amount       = @order.total.to_s
+          redirect_url = gateway_ccavenue_callback_url(@transaction, :protocol => "http")
+          checksum     = transaction_checksum(merchant_id, order_id, amount, redirect_url, @payment_method.preferred_working_key)
+        %>
+  
+          <%= hidden_field_tag 'Merchant_Id',                  merchant_id %>
+          <%= hidden_field_tag 'Order_Id',                     order_id %>
+          <%= hidden_field_tag 'Amount',                       amount %>
+          <%= hidden_field_tag 'Redirect_Url',                 redirect_url %>
+          <%= hidden_field_tag 'Checksum',                     checksum %>
+  
+          <%= hidden_field_tag 'billing_cust_name',            @bill_address.full_name %>
+          <%= hidden_field_tag 'billing_cust_address',         @bill_address.address1  %>
+          <%= hidden_field_tag 'billing_cust_city',            @bill_address.city %>
+          <%= hidden_field_tag 'billing_cust_state',           (@bill_address.state.try(:name) || @bill_address.state_name) %>
+          <%= hidden_field_tag 'billing_zip_code',             @bill_address.zipcode %>
+          <%= hidden_field_tag 'billing_cust_country',         @bill_address.country.name %>
+          <%= hidden_field_tag 'billing_cust_tel',             @bill_address.phone %>
+          <%= hidden_field_tag 'billing_cust_email',           @order.email %>
+  
+          <%= hidden_field_tag 'delivery_cust_name',           @ship_address.full_name %>
+          <%= hidden_field_tag 'delivery_cust_address',        @ship_address.address1 %>
+          <%= hidden_field_tag 'delivery_cust_city',           @ship_address.city %>
+          <%= hidden_field_tag 'delivery_cust_state',          (@ship_address.state.try(:name) || @ship_address.state_name) %>
+          <%= hidden_field_tag 'delivery_zip_code',            @ship_address.zipcode %>
+          <%= hidden_field_tag 'delivery_cust_country',        @ship_address.country.name %>
+          <%= hidden_field_tag 'delivery_cust_tel',            @ship_address.phone %>
+          <%= hidden_field_tag 'delivery_cust_email',          @order.email %>  
+          <%= render :partial => "spree/checkout/confirm" %>
+          <p style="margin: 10px 0;"><%= t(:ccavenue_instructional_text) %></p><br/>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <%= form_tag @payment_method.preferred_url do %>
-    <%
-      merchant_id  = @payment_method.preferred_account_id
-      order_id     = @transaction.gateway_order_number 
-      amount       = @order.total.to_s
-      redirect_url = gateway_ccavenue_callback_url(@transaction, :protocol => "http")
-      checksum     = transaction_checksum(merchant_id, order_id, amount, redirect_url, @payment_method.preferred_working_key)
-    %>
-  
-    <%= hidden_field_tag 'Merchant_Id',                  merchant_id %>
-    <%= hidden_field_tag 'Order_Id',                     order_id %>
-    <%= hidden_field_tag 'Amount',                       amount %>
-    <%= hidden_field_tag 'Redirect_Url',                 redirect_url %>
-    <%= hidden_field_tag 'Checksum',                     checksum %>
-  
-    <%= hidden_field_tag 'billing_cust_name',            @bill_address.full_name %>
-    <%= hidden_field_tag 'billing_cust_address',         @bill_address.address1  %>
-    <%= hidden_field_tag 'billing_cust_city',            @bill_address.city %>
-    <%= hidden_field_tag 'billing_cust_state',           (@bill_address.state.try(:name) || @bill_address.state_name) %>
-    <%= hidden_field_tag 'billing_zip_code',             @bill_address.zipcode %>
-    <%= hidden_field_tag 'billing_cust_country',         @bill_address.country.name %>
-    <%= hidden_field_tag 'billing_cust_tel',             @bill_address.phone %>
-    <%= hidden_field_tag 'billing_cust_email',           @order.email %>
-  
-    <%= hidden_field_tag 'delivery_cust_name',           @ship_address.full_name %>
-    <%= hidden_field_tag 'delivery_cust_address',        @ship_address.address1 %>
-    <%= hidden_field_tag 'delivery_cust_city',           @ship_address.city %>
-    <%= hidden_field_tag 'delivery_cust_state',          (@ship_address.state.try(:name) || @ship_address.state_name) %>
-    <%= hidden_field_tag 'delivery_zip_code',            @ship_address.zipcode %>
-    <%= hidden_field_tag 'delivery_cust_country',        @ship_address.country.name %>
-    <%= hidden_field_tag 'delivery_cust_tel',            @ship_address.phone %>
-    <%= hidden_field_tag 'delivery_cust_email',          @order.email %>
-  
-  
-    <p><%= t('ccavenue_instuctional_text') %></p><br/>
-    <%= render :partial => "spree/checkout/confirm" %>
-  <% end %>
+  </div>
+  <div class="clear"></div>
 </div>
+
