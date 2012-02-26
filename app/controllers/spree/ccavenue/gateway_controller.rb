@@ -1,4 +1,5 @@
 class Spree::Ccavenue::GatewayController < Spree::BaseController
+  ssl_required :show
   helper "spree/checkout"
   def show
     @order = Spree::Order.find_by_number(params[:order_id])
